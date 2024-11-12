@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // routes/web.php
 Route::prefix('client')->group(function () {
-  Route::get('/search', [ClientController::class, 'search']);
+  Route::get('search', [ClientController::class, 'search']);
 });
+
+Route::get('data', [DashboardController::class, 'data']);
+Route::get('earning', [DashboardController::class, 'earning']);
