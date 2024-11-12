@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\ClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+
+// routes/web.php
+Route::prefix('client')->group(function () {
+  Route::get('/search', [ClientController::class, 'search']);
 });

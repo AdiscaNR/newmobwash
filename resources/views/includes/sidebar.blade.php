@@ -40,6 +40,18 @@
                     <span>Recap</span></a>
             </li>
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Setting
+            </div>
+
+            <!-- Nav Item - Transaction -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('crew') }}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Crew</span></a>
+            </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

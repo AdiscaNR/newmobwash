@@ -9,25 +9,46 @@ use Illuminate\Support\Facades\Storage;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+  use AuthorizesRequests, ValidatesRequests;
 
-    public function storeFile($file, $path)
-    {
-        // $filename = time() . $file->getClientOriginalName();
-        // $file->move($path, $filename);
+  public function response_json($status, $message, $data = null)
+  {
+    if ($data) {
+      return response()->json([
+        'status' => $status,
+        'message' => $message,
+        'data' => $data
+      ]);
+    } else {
+      return response()->json([
+        'status' => $status,
+        'message' => $message,
+      ]);
+    }
+  }
 
-        $pathFile = $file->store($path, 'public');
-        $url = Storage::url($pathFile);
-        return $url;
+  public function storeFile($file, $path)
+  {
+    // $filename = time() . $file->getClientOriginalName();
+    // $file->move($path, $filename);
+
+    $pathFile = $file->store($path, 'public');
+    $url = Storage::url($pathFile);
+    return $url;
+  }
+
+  public function deleteFile($file)
+  {
+    $path = str_replace('/storage/', '', $file);
+    if (Storage::disk('public')->exists($path)) {
+      return Storage::disk('public')->delete($path);
     }
 
-    public function deleteFile($file)
-    {
-        $path = str_replace('/storage/', '', $file);
-        if (Storage::disk('public')->exists($path)) {
-            return Storage::disk('public')->delete($path);
-        }
+    return 'not found';
+  }
 
-        return 'not found';
-    }
+  function formatRupiah($value)
+  {
+    return 'Rp ' . number_format($value, 0, ',', '.');
+  }
 }

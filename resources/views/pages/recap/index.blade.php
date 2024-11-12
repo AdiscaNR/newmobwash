@@ -9,8 +9,10 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Recap</h1>
-            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+            @if (sizeof($tx) != 0)
+            <a href="{{ route('recap.export') . '?' . http_build_query(Request::query()) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                                                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            @endif
         </div>
 
         <!-- Content Row -->
@@ -46,6 +48,7 @@
                                 </div>
                             </div>
 
+                            @if(sizeof($tx) != 0)
                             <div class="table-responsive mt-2">
                                 <table class="table">
                                     <thead>
@@ -85,21 +88,23 @@
                                                 <td>{{ $r->payment->total ?? '' }}</td>
                                                 <td class="text-center">
                                                     @if ($r->done == 1)
-                                                        {{ 'Done' }}
+                                                      {{ 'Done' }}
                                                     @else
-                                                        <span title="Copy Link" style="cursor: pointer;"
-                                                            onclick="copyLink('{{ url('/' . 'order/' . $r->id) }}')"><svg
-                                                                fill="#000000" xmlns="http://www.w3.org/2000/svg"
-                                                                width="14px" height="14px" viewBox="0 0 52 52"
-                                                                enable-background="new 0 0 52 52" xml:space="preserve">
-                                                                <g>
-                                                                    <path d="M17.4,11.6h17.3c0.9,0,1.6-0.7,1.6-1.6V6.8c0-2.6-2.1-4.8-4.7-4.8h-11c-2.6,0-4.7,2.2-4.7,4.8V10
-      C15.8,10.9,16.5,11.6,17.4,11.6z" />
-                                                                    <path
-                                                                        d="M43.3,6h-1.6c-0.5,0-0.8,0.3-0.8,0.8V10c0,3.5-2.8,6.4-6.3,6.4H17.4c-3.5,0-6.3-2.9-6.3-6.4V6.8
-      c0-0.5-0.3-0.8-0.8-0.8H8.7C6.1,6,4,8.2,4,10.8v34.4C4,47.8,6.1,50,8.7,50h34.6c2.6,0,4.7-2.2,4.7-4.8V10.8C48,8.2,45.9,6,43.3,6z" />
-                                                                </g>
-                                                            </svg></span>
+                                                      <span title="Copy Link" style="cursor: pointer;"
+                                                          onclick="copyLink('{{ url('/' . 'order/' . $r->id) }}')">
+                                                          <svg
+                                                              fill="#000000" xmlns="http://www.w3.org/2000/svg"
+                                                              width="14px" height="14px" viewBox="0 0 52 52"
+                                                              enable-background="new 0 0 52 52" xml:space="preserve">
+                                                              <g>
+                                                                  <path d="M17.4,11.6h17.3c0.9,0,1.6-0.7,1.6-1.6V6.8c0-2.6-2.1-4.8-4.7-4.8h-11c-2.6,0-4.7,2.2-4.7,4.8V10
+    C15.8,10.9,16.5,11.6,17.4,11.6z" />
+                                                                  <path
+                                                                      d="M43.3,6h-1.6c-0.5,0-0.8,0.3-0.8,0.8V10c0,3.5-2.8,6.4-6.3,6.4H17.4c-3.5,0-6.3-2.9-6.3-6.4V6.8
+    c0-0.5-0.3-0.8-0.8-0.8H8.7C6.1,6,4,8.2,4,10.8v34.4C4,47.8,6.1,50,8.7,50h34.6c2.6,0,4.7-2.2,4.7-4.8V10.8C48,8.2,45.9,6,43.3,6z" />
+                                                              </g>
+                                                          </svg>
+                                                      </span>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -107,6 +112,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @endif
                         </form>
                     </div>
                 </div>

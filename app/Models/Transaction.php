@@ -22,7 +22,7 @@ class Transaction extends Model
     }
 
     public function crews() {
-        return $this->belongsToMany(Crew::class, 'transaction_crews', 'tx_id', 'crew_id');
+        return $this->belongsToMany(Crew::class, 'transaction_crews', 'tx_id', 'crew_id')->withTrashed();
     }
 
     public function cr() {

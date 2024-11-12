@@ -12,6 +12,6 @@ class TransactionCrew extends Model
     ];
 
     public function crew() {
-        return $this->belongsTo(Crew::class, 'crew_id');
+        return $this->belongsTo(Crew::class, 'crew_id')->withTrashed();
     }
 }
