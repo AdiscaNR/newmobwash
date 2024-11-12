@@ -327,7 +327,7 @@
                                     label: function(tooltipItem, chart) {
                                         var datasetLabel = chart.datasets[tooltipItem
                                             .datasetIndex].label || '';
-                                        return datasetLabel + ': $' + number_format(
+                                        return datasetLabel + ': Rp ' + number_format(
                                             tooltipItem.yLabel);
                                     }
                                 }

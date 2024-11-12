@@ -44,7 +44,7 @@ class DashboardController extends Controller
           return $query->where('done', $done);
         })
         ->orderBy('date', 'asc')
-        ->get();
+        ->paginate(15);
     }
     return view('pages.recap.index', $data);
   }
@@ -91,11 +91,11 @@ class DashboardController extends Controller
     $payments = DB::table('payments')
       ->join('transactions', 'transactions.id', '=', 'payments.tx_id')
       ->select(
-        DB::raw('MONTH(payments.created_at) as month'),
+        DB::raw('MONTH(transactions.date) as month'),
         DB::raw('SUM(payments.total) as total_amount')
       )
-      ->whereYear('payments.created_at', $currentYear) // Menyaring berdasarkan tahun
-      ->groupBy(DB::raw('MONTH(payments.created_at)'))
+      ->whereYear('transactions.date', $currentYear) // Menyaring berdasarkan tahun
+      ->groupBy(DB::raw('MONTH(transactions.date)'))
       ->get();
 
     // Menyusun data total pembayaran per bulan

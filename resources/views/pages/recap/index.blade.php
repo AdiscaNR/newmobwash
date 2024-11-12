@@ -111,6 +111,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                {{ $tx->links() }}
                             </div>
                             @endif
                         </form>
